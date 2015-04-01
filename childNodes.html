@@ -16,7 +16,8 @@ Wrong(in Safari):
 
 <script>
     var r_parent = document.getElementById('r-container'),
-        w_parent = document.getElementById('w-container');
+        w_parent = document.getElementById('w-container'),
+        isIE8 = document.all && !document.addEventListener;
 
     for(var i = 0; i < 2; i++) {
         var r_dom = document.createElement('div'),
@@ -24,7 +25,7 @@ Wrong(in Safari):
         r_dom.id = i + 1;
         w_dom.id = i + 1;
 
-        if (r_dom.textContent) {
+        if (!isIE8) {
             r_dom.textContent = 'Node ' + (i + 1);
             w_dom.textContent = 'Node ' + (i + 1);
         } else {
@@ -32,7 +33,7 @@ Wrong(in Safari):
             w_dom.innerText = 'Node ' + (i + 1);
         }
 
-    	if (!(document.all && !document.addEventListener)) {
+    	if (!isIE8) {
     		r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
             w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         } else {
@@ -45,9 +46,9 @@ Wrong(in Safari):
     //read is ok.
     var domByItem = r_parent.childNodes.item(1),
         domByIndex = r_parent.childNodes[1];
-        
-    alert(domByItem.textContent || domByItem.innerText);
-    alert(domByIndex.textContent || domByIndex.innerText);
+
+    alert(isIE8 ? domByItem.innerText : domByItem.textContent);
+    alert(isIE8 ? domByIndex.innerText : domByIndex.textContent);
 </script>
 
 </body>
