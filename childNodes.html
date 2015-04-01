@@ -25,17 +25,21 @@ Wrong(in Safari):
         w_dom.id = i + 1;
         r_dom.innerText = 'Node ' + (i + 1);
         w_dom.innerText = 'Node ' + (i + 1);
-        try {
-            r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
-            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
-        } catch (e) {
-            //IE8
-            r_parent.insertBefore(r_dom, r_parent.childNodes[i] || null);
-            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
-        }
+        
+	if (document.all && document.addEventListener) {
+		parentNode.insertBefore(
+      		childNode,
+            parentNode.childNodes.item(index) || null
+        );
+    } else {
+        //IE8 can't use `item` when childNodes is empty.
+        parentNode.insertBefore(
+            childNode,
+            parentNode.childNodes[index] || null
+        );  
     }
-
-    //read is right.
+    
+    //read is ok.
     alert(r_parent.childNodes.item(1).innerText);
     alert(r_parent.childNodes[1].innerText);
 </script>
