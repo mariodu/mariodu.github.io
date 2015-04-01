@@ -6,24 +6,39 @@
 </head>
 <body>
 
-<div id="container"></div>
+<p>See the source code.</p>
+<br/>
+Right:
+<div id="r-container"></div>
+
+<br />
+Wrong(in Safari):
+<div id="w-container"></div>
 
 <script>
-    var parent = document.getElementById('container');
+    var r_parent = document.getElementById('r-container'),
+        w_parent = document.getElementById('w-container');
+
     for(var i = 0; i < 2; i++) {
-        var dom = document.createElement('div');
-        dom.id = i + 1;
-        dom.innerText = 'Node ' + (i + 1);
+        var r_dom = document.createElement('div'),
+            w_dom = document.createElement('div');
+        r_dom.id = i + 1;
+        w_dom.id = i + 1;
+        r_dom.innerText = 'Node ' + (i + 1);
+        w_dom.innerText = 'Node ' + (i + 1);
         try {
-            parent.insertBefore(dom, parent.childNodes.item(i) || null);
+            r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
+            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         } catch (e) {
             //IE8
-            parent.insertBefore(dom, parent.childNodes[i] || null);
+            r_parent.insertBefore(r_dom, r_parent.childNodes[i] || null);
+            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         }
     }
 
-    alert(parent.childNodes.item(1).innerText);
-    alert(parent.childNodes[1].innerText);
+    //read is right.
+    alert(r_parent.childNodes.item(1).innerText);
+    alert(r_parent.childNodes[1].innerText);
 </script>
 
 </body>
