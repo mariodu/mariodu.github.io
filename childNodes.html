@@ -25,18 +25,19 @@ Wrong(in Safari):
         w_dom.id = i + 1;
         r_dom.innerText = 'Node ' + (i + 1);
         w_dom.innerText = 'Node ' + (i + 1);
-        
-	if (document.all && document.addEventListener) {
-		parentNode.insertBefore(
-      		childNode,
-            parentNode.childNodes.item(index) || null
-        );
-    } else {
-        //IE8 can't use `item` when childNodes is empty.
-        parentNode.insertBefore(
-            childNode,
-            parentNode.childNodes[index] || null
-        );  
+
+    	if (document.all && document.addEventListener) {
+    		parentNode.insertBefore(
+          		childNode,
+                parentNode.childNodes.item(index) || null
+            );
+        } else {
+            //IE8 can't use `item` when childNodes is empty.
+            parentNode.insertBefore(
+                childNode,
+                parentNode.childNodes[index] || null
+            );  
+        }
     }
     
     //read is ok.
