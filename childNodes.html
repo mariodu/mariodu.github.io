@@ -27,16 +27,12 @@ Wrong(in Safari):
         w_dom.innerText = 'Node ' + (i + 1);
 
     	if (document.all && document.addEventListener) {
-    		parentNode.insertBefore(
-          		childNode,
-                parentNode.childNodes.item(index) || null
-            );
+    		r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
+            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         } else {
             //IE8 can't use `item` when childNodes is empty.
-            parentNode.insertBefore(
-                childNode,
-                parentNode.childNodes[index] || null
-            );  
+            r_parent.insertBefore(r_dom, r_parent.childNodes[i] || null);
+            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         }
     }
     
