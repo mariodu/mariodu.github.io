@@ -34,7 +34,7 @@ Wrong(in Safari):
         }
 
         var r_beforeNode = i >= r_parent.childNodes.length ? null : r_parent.childNodes.item(i);
-        var w_beforeNode = i >= w_parent.childNodes.length ? null : w_parent.childNodes.item(i);
+        var w_beforeNode = w_parent.childNodes[i];
 		
         r_parent.insertBefore(r_dom, r_beforeNode);
         w_parent.insertBefore(w_dom, w_beforeNode);
