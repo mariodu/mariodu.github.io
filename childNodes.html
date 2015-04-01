@@ -33,14 +33,11 @@ Wrong(in Safari):
             w_dom.innerText = 'Node ' + (i + 1);
         }
 
-    	if (!isIE8) {
-    		r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
-            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
-        } else {
-            //IE8 can't use `item` when childNodes is empty.
-            r_parent.insertBefore(r_dom, r_parent.childNodes[i] || null);
-            w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
-        }
+        var r_beforeNode = i >= r_parent.childNodes.length ? null : r_parent.childNodes.item(i);
+        var w_beforeNode = i >= w_parent.childNodes.length ? null : w_parent.childNodes.item(i);
+		
+        r_parent.insertBefore(r_dom, r_beforeNode);
+        w_parent.insertBefore(w_dom, w_beforeNode);
     }
 
     //read is ok.
