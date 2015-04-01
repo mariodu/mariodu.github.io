@@ -23,8 +23,14 @@ Wrong(in Safari):
             w_dom = document.createElement('div');
         r_dom.id = i + 1;
         w_dom.id = i + 1;
-        r_dom.innerText = 'Node ' + (i + 1);
-        w_dom.innerText = 'Node ' + (i + 1);
+
+        if (r_dom.textContent) {
+            r_dom.textContent = 'Node ' + (i + 1);
+            w_dom.textContent = 'Node ' + (i + 1);
+        } else {
+            r_dom.innerText = 'Node ' + (i + 1);
+            w_dom.innerText = 'Node ' + (i + 1);
+        }
 
     	if (!(document.all && !document.addEventListener)) {
     		r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
@@ -37,8 +43,11 @@ Wrong(in Safari):
     }
 
     //read is ok.
-    alert(r_parent.childNodes.item(1).innerText);
-    alert(r_parent.childNodes[1].innerText);
+    var domByItem = r_parent.childNodes.item(1),
+        domByIndex = r_parent.childNodes[1];
+        
+    alert(domByItem.textContent || domByItem.innerText);
+    alert(domByIndex.textContent || domByIndex.innerText);
 </script>
 
 </body>
