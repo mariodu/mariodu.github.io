@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ChildNodes Test</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+    var parent = document.getElementById('container');
+    for(var i = 0; i < 2; i++) {
+        var dom = document.createElement('div');
+        dom.id = i + 1;
+        dom.innerText = 'Node ' + (i + 1);
+        try {
+            parent.insertBefore(dom, parent.childNodes.item(i) || null);
+        } catch (e) {
+            //IE8
+            parent.insertBefore(dom, parent.childNodes[i] || null);
+        }
+    }
+
+    alert(parent.childNodes.item(1).innerText);
+    alert(parent.childNodes[1].innerText);
+</script>
+
+</body>
+</html>
