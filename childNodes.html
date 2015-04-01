@@ -26,7 +26,7 @@ Wrong(in Safari):
         r_dom.innerText = 'Node ' + (i + 1);
         w_dom.innerText = 'Node ' + (i + 1);
 
-    	if (document.all && !document.addEventListener) {
+    	if (!(document.all && !document.addEventListener)) {
     		r_parent.insertBefore(r_dom, r_parent.childNodes.item(i) || null);
             w_parent.insertBefore(w_dom, w_parent.childNodes[i] || null);
         } else {
